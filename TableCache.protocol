@@ -1,0 +1,55 @@
+==============
+  TableCache
+==============
+
+对外接口
+----------------------------------------------------
+//-- 增加和修改
+//-- hintId 为 整形 或者 字符串
+//-- hint/split field 由服务自动处理，不能出现在 values 中。
+=> modify { hintId:%?, table:%s, values:{%s:%s} }
+<= {}
+
+
+//-- hintId 和 hintIds 必有一个，类型为 整形 或者 字符串
+//-- data 为 hintId 为 key 的字典。字典的每项，以传入的fields的顺序为准。
+//-- jsonCompatible default is false
+=> fetch { ?hintId:%?, ?hintIds:[%?], table:%s, fields:[%s], ?jsonCompatible:%b }
+<= { data:{%?:[%s] } }  //-- jsonCompatible:false
+<= { data:{%s:[%s] } }  //-- jsonCompatible:true
+
+
+//-- hintId 为 整形 或者 字符串
+//-- 同步删除数据库中数据
+=> delete { hintId:%?, table:%s }
+<= {}
+
+
+维护接口
+----------------------------------------------------
+=> invalidateTable { table:%s, ?internal:%b }
+<= {}
+
+//-- 重新加载 endpoints
+=> refreshCluster {}
+<= {}
+
+
+内部接口
+----------------------------------------------------
+//-- *不会* 删除数据库中数据
+=> invalidate { table:%s, hintIds:[%d] }
+<= {}
+
+
+----------------------------
+ Exception
+----------------------------
+
+# If excpetion occurred, return standard error answer.
+# if error caused by mysql, raiser field is "mysql". If error caused by DBProxy, raiser field is "DBProxy".
+# exception codes:
+# ------------------------------------------------
+# 100402: Query DBProxy Failed.
+# 100403: Disable operation.
+# 100404: Table is not found.
