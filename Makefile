@@ -11,6 +11,7 @@ LIBS += -L$(FPNN_DIR)/extends -L$(FPNN_DIR)/core -L$(FPNN_DIR)/proto -L$(FPNN_DI
 OBJS_SERVER = TableCache.o TableCacheProcessor.o ClusterNotifier.o
 
 all: $(EXES_SERVER)
+	make -C tools
 
 deploy:
 	-mkdir -p $(DEPLOYMENT_DIR)/bin/
