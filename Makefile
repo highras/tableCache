@@ -17,6 +17,7 @@ deploy:
 	-mkdir -p $(DEPLOYMENT_DIR)/conf/
 	cp -rf $(EXES_SERVER) $(DEPLOYMENT_DIR)/bin/
 	cp -rf tableCache.conf $(DEPLOYMENT_DIR)/conf/
+	make deploy -C tools
 
 clean:
 	$(RM) *.o $(EXES_SERVER)

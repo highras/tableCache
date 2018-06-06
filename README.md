@@ -5,7 +5,7 @@
 + FPNN 技术生态基础服务
 + 数据库行级缓存
 + 缓存即数据源
-+ 搭配[FPNN DBProxy](https://github.com/highras/dbproxy)使用
++ 搭配 [FPNN DBProxy](https://github.com/highras/dbproxy) 使用
 
 
 ## 二、运行环境 & 编译
