@@ -22,4 +22,6 @@ deploy:
 
 clean:
 	$(RM) *.o $(EXES_SERVER)
+	make clean -C tools
+	
 include $(FPNN_DIR)/def.mk
